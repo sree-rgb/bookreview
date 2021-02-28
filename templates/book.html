@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block title %}
+{{book.title}}
+{% endblock %}
+
+{% block heading %}
+	BookReviews
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6">
+				<h3>{{book.title}}</h3>
+			</div>
+			<div class="col-sm">
+				{% if book.ratings == 0.0 %}
+					<h6>Unrated</h6>
+				{% else %} 
+				<h4>{{book.ratings}}</h4> 
+				{% endif %}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm">
+				ISBN:{{book.isbn}} 
+			</div>
+			<div class="col-sm-4">
+				{{book.author}}
+			</div>
+			<div class="col-sm">
+				{{book.year}}
+			</div>
+		</div>
+	</div>
+	{% if gdvalues|length > 1 %}
+	<br>
+	<h5> Goodreads.com rating</h5>
+	Average Rating:{{gdvalues.average_rating}}<br>
+	Number of Ratings:{{gdvalues.work_ratings_count}}<br>
+
+	{% endif %}
+	{%if reviewed == False  %}
+	<form method="post">
+	Rating<Br>
+  <input type="radio" name="rating" value="1" > 1
+  <input type="radio" name="rating" value="2"> 2 
+  <input type="radio" name="rating" value="3"> 3  
+  <input type="radio" name="rating" value="4"> 4
+  <input type="radio" name="rating" value="5" checked> 5<br><br>
+  <textarea maxlength="250" name="usertext" placeholder="Enter your review here">
+</textarea>
+<br>
+  <input type="submit">
+</form> 
+{%  endif  %}
+
+<ul class="list-unstyled">
+	{% if reviews|length > 1 %}
+	<h4> Reviews</h4>
+	{% endif %}
+	{% for review in reviews %}
+  <li class="media">
+    <img src="{{url_for('static',filename='user.png')}}" width=64px class="mr-3" alt="...">
+    <div class="media-body">
+      <h5 class="mt-0 mb-1">{{review.username}}
+      	{% if review.user_rating == 1 %} &#9733; &#9734; &#9734; &#9734; &#9734; 
+      	{% endif %}
+      	{% if review.user_rating == 2 %} &#9733; &#9733; &#9734; &#9734; &#9734; 
+      	{% endif %}
+      	{% if review.user_rating == 3 %} &#9733; &#9733; &#9733; &#9734; &#9734; 
+      	{% endif %}
+      	{% if review.user_rating == 4 %} &#9733; &#9733; &#9733; &#9733; &#9734; 
+      	{% endif %}
+      	{% if review.user_rating == 5 %} &#9733; &#9733; &#9733; &#9733; &#9733; 
+      	{% endif %}
+      </h5>
+      {{onestar}}
+      {{review.review_text}}
+    </div>
+  </li>
+ 	{% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,27 @@
+body{
+	width:80%;
+	background-color:blue;
+}
+h1 {
+	color: blue;
+}
+
+p {
+	font-family: sans-serif;
+	font-size: 18px;
+
+}
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	}
+
+.container > div {
+	background-color: springgreen;
+	font-size: 20px;
+	margin: 20px;
+	padding: 20px;
+	width: 200px;
+	text-align: justify:
+
+	}

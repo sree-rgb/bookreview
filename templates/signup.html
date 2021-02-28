@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block title %}
+Sign Up
+{% endblock %}
+
+{% block heading %}
+    Sign Up
+{% endblock %}
+
+{% block body %}
+{%if message is defined%}
+<div class="alert alert-danger" role="alert">
+  {{message}}
+</div>
+{% endif %}
+{%if success_message is defined%}
+<div class="alert alert-success" role="alert">
+  You have  successfully registered. <p> <a href="/login">Click here to Login.</a></p>
+</div>
+{% endif %}
+<form method="post">
+  usernname:<br>
+  <input type="text" name="username" {{dbld}} >
+  <br>
+  password:<br>
+  <input type="password" name="password1" {{dbld}}>
+  <br>
+  password:<br>
+  <input type="password" name="password2"{{dbld}}>
+  <br>
+  email:<br>
+    <input type="email" name="email" {{dbld}}>
+  <br>
+
+    <input type="submit" value="Submit" {{dbld}}>
+   <br>
+</form> 
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+{% block title %}
+Home
+{% endblock %}
+
+{% block heading %}
+	BookReviews
+{% endblock %}
+
+{% block body %}
+	<div class="book-searchbar">
+		<form method="post">
+			Search Books: <input type="text" name="search_text" >
+			<input type="submit" value="Search"><br>
+			<input type="radio" name="search_type" value="title" checked> Title
+			<input type="radio" name="search_type" value="author"> Author
+			<input type="radio" name="search_type" value="isbn"> ISBN
+		</form>
+	</div>
+	<p>{{message}}</p>
+	{%if search_results is defined%}
+	<ol>
+						<div class="container">
+					<div class="row">
+						<div class="col">
+							Title
+						</div>
+						<div class="col">
+							Author 
+						</div>
+						<div class="col">
+							Year 
+						</div>
+						<div class="col">
+							ISBN 
+						</div>
+
+						<div class="col">
+							Ratings 
+						</div>
+						<div class="col">
+							No. of Reviews 
+						</div>
+
+  					</div>
+  				</div>
+	   {% for search_result in search_results %}
+			<li>
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<a href="/book/{{search_result.id}}">{{ search_result.title }} </a>
+						</div>
+						<div class="col">
+							{{ search_result.author }} 
+						</div>
+						<div class="col">
+							{{ search_result.year }} 
+						</div>
+						<div class="col">
+							{{ search_result.isbn }} 
+						</div>
+						<div class="col">
+							{{ search_result.ratings }} 
+						</div>
+						<div class="col">
+							{{ search_result.reviews }} 
+						</div>
+
+  					</div>
+  				</div>
+
+			</li>
+		   
+		{% endfor %}
+	 </ol>
+{% endif %}
+{% endblock %}
